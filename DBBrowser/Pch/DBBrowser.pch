@@ -1,0 +1,25 @@
+//
+//  DBBrowser.pch
+//  DBBrowser
+//
+//  Created by yao on 2019/5/15.
+//  Copyright © 2019 yao. All rights reserved.
+//
+
+#ifndef DBBrowser_pch
+#define DBBrowser_pch
+
+#import "DBBrowserConst.h"
+#import "DBBrowserMacro.h"
+#import "DBBrowserMacroNotifacationName.h"
+#import "DBBrowserKeyAndPassWord.h"
+
+//引入WKWebView框架
+#import <WebKit/WebKit.h>
+#import "DBDefaultManager.h"
+#import "DBUserInfoManager.h"
+#import "DBRootViewControllerManager.h"
+
+#import "UIViewController+DBCategory.h"
+
+#endif /* DBBrowser_pch */

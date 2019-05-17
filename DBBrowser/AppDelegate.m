@@ -7,16 +7,26 @@
 //
 
 #import "AppDelegate.h"
-
+#import "AppDelegateHelper.h"
+#import "DBRootViewControllerManager.h"
 @interface AppDelegate ()
-
+@property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+   
+    
+    [self.appDelegateHelper application:application didFinishLaunchingWithOptions:launchOptions];
+    
+    
+    [[DBRootViewControllerManager shareManager] setRootViewController];
+    
     return YES;
 }
 
@@ -93,6 +103,12 @@
         NSLog(@"Unresolved error %@, %@", error, error.userInfo);
         abort();
     }
+}
+-(AppDelegateHelper *)appDelegateHelper {
+    if(!_appDelegateHelper){
+        _appDelegateHelper = [[AppDelegateHelper alloc] init];
+    }
+    return _appDelegateHelper;
 }
 
 @end

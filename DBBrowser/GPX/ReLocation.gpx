@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gpx version="1.1"
+    creator="GMapToGPX 6.4j - http://www.elsewhere.org/GMapToGPX/"
+    xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <!--#31.266690  #121.513227 -->
+    <!--     31.255713422688655 121.51010557702513-->
+    <!--lat 从南到北 越来越大    lon从西到东越来越大-->
+    <wpt lat="31.255713422688655" lon="121.51010557702513">
+        <name>九寨沟</name>
+        <cmt>九寨沟</cmt>
+        <desc>九寨沟</desc>
+    </wpt>
+</gpx>
