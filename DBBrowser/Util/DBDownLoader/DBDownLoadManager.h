@@ -7,7 +7,7 @@
 //
 
 #import "DBBaseObject.h"
-
+#import <AFNetworking/AFNetworking.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DBDownLoadManager : DBBaseObject

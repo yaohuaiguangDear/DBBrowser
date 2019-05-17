@@ -15,7 +15,7 @@
 
 @implementation DBDownLoadManager
 - (void)downLoadWithURL:(NSString *)url{
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
+   /* NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *sesseion = [NSURLSession sessionWithConfiguration:configuration];
     NSURLSessionDownloadTask *downLoadTask = [sesseion downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -24,14 +24,79 @@
         [[NSFileManager defaultManager] moveItemAtURL:location toURL:[NSURL fileURLWithPath:filePath] error:nil];
         NSLog(@"%@", filePath);
     }];
+    
     [downLoadTask resume];
+    
+    */
+   
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
+    
+    //    NSString *voiceURL = [self _urlByAppendingStringWithHostName:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        //文件的存储路径
+        NSURL *downloadURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        NSString * fileName = [url lastPathComponent];
+        NSString * filePath = [NSString stringWithFormat:@"Audios/luyin_%@", fileName];
+        downloadURL = [downloadURL URLByAppendingPathComponent:filePath];
+        return downloadURL;
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        
+    }];
+    /*
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath,NSURLResponse *response) {
+        //文件的存储路径
+        NSURL *downloadURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        NSString * fileName = [url lastPathComponent];
+        NSString * filePath = [NSString stringWithFormat:@"Audios/luyin_%@", fileName];
+        downloadURL = [downloadURL URLByAppendingPathComponent:filePath];
+        return downloadURL;
+    } completionHandler:^(NSURLResponse *response,NSURL *filePath, NSError *error) {
+        //此处已经在主线程了
+        if (!error) {
+            NSLog(@"文件下载成功了 地址:%@", filePath);
+           
+        } else {
+            
+        }
+    }];
+     */
+    [downloadTask resume];
+    
+    
 }
 - (void)downLoadUseDelegateWithURL:(NSString *)url{
+    /*
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request];
     [task resume];
+     */
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
+    
+    //    NSString *voiceURL = [self _urlByAppendingStringWithHostName:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:downloadTask.response.suggestedFilename];
+        [[NSFileManager defaultManager] moveItemAtURL:targetPath toURL:[NSURL fileURLWithPath:filePath] error:nil];
+        NSLog(@"%@", filePath);
+        
+//        [self saveVideo:[NSURL fileURLWithPath:filePath]];
+        //文件的存储路径
+      
+        return [NSURL fileURLWithPath:filePath];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        
+    }];
+    [downloadTask resume];
+    
 }
 #pragma mark -- NSURLSessionDownloadDelegate
 
