@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBSearchViewController">
             <connections>
                 <outlet property="downLoadButton" destination="OhP-2W-aUs" id="pr7-a0-xMO"/>
+                <outlet property="progressView" destination="LfT-Qd-cVd" id="iq7-hj-WJ3"/>
+                <outlet property="tableView" destination="e9k-HJ-ZS7" id="M2j-zn-wlr"/>
                 <outlet property="textView" destination="4Gt-tM-Zgw" id="fTb-VO-tLI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -47,6 +49,22 @@
                         <action selector="apperContentAction:" destination="-1" eventType="touchUpInside" id="g8g-dE-1jc"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="下载进度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aa9-lh-48V">
+                    <rect key="frame" x="35" y="304" width="70" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LfT-Qd-cVd">
+                    <rect key="frame" x="113" y="313" width="231" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </progressView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e9k-HJ-ZS7">
+                    <rect key="frame" x="35" y="367" width="359" height="327"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -55,7 +73,7 @@
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="4Gt-tM-Zgw" secondAttribute="trailing" constant="40" id="aYa-px-EsN"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="37.681159420289859" y="34.821428571428569"/>
+            <point key="canvasLocation" x="-278.26086956521743" y="28.794642857142854"/>
         </view>
     </objects>
 </document>

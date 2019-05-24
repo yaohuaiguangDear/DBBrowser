@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2010E9AB22967DB400155C2C /* PlistFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2010E9AA22967DB400155C2C /* PlistFileManager.m */; };
+		2010E9AF22967F9D00155C2C /* DBFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2010E9AE22967F9D00155C2C /* DBFileManager.m */; };
+		2010E9B22296A43100155C2C /* DBBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2010E9B12296A43100155C2C /* DBBaseTableViewCell.m */; };
+		2010E9B52296A47F00155C2C /* DBSearchHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2010E9B42296A47F00155C2C /* DBSearchHistoryCell.m */; };
 		20120E9F228D32E100241228 /* UIViewController+DBCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 20120E9E228D32E100241228 /* UIViewController+DBCategory.m */; };
 		20120EA2228D336E00241228 /* AppDelegateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 20120EA1228D336E00241228 /* AppDelegateHelper.m */; };
+		20120EA922951C8300241228 /* DBLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20120EA822951C8300241228 /* DBLogManager.m */; };
 		201BFAFB228BFCBD000DC2DA /* DBBaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 201BFAFA228BFCBD000DC2DA /* DBBaseTabBarViewController.m */; };
 		201BFB04228C07C0000DC2DA /* DBSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 201BFB02228C07C0000DC2DA /* DBSearchViewController.m */; };
 		201BFB05228C07C0000DC2DA /* DBSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 201BFB03228C07C0000DC2DA /* DBSearchViewController.xib */; };
@@ -86,10 +91,20 @@
 
 /* Begin PBXFileReference section */
 		0EF34B330F81B5914276C4DC /* Pods_DBBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DBBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2010E9A922967DB400155C2C /* PlistFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlistFileManager.h; sourceTree = "<group>"; };
+		2010E9AA22967DB400155C2C /* PlistFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlistFileManager.m; sourceTree = "<group>"; };
+		2010E9AD22967F9D00155C2C /* DBFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBFileManager.h; sourceTree = "<group>"; };
+		2010E9AE22967F9D00155C2C /* DBFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBFileManager.m; sourceTree = "<group>"; };
+		2010E9B02296A43100155C2C /* DBBaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBBaseTableViewCell.h; sourceTree = "<group>"; };
+		2010E9B12296A43100155C2C /* DBBaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBBaseTableViewCell.m; sourceTree = "<group>"; };
+		2010E9B32296A47F00155C2C /* DBSearchHistoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DBSearchHistoryCell.h; path = DBBrowser/Controller/DBBaseClass/DBSearchHistoryCell.h; sourceTree = SOURCE_ROOT; };
+		2010E9B42296A47F00155C2C /* DBSearchHistoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DBSearchHistoryCell.m; path = DBBrowser/Controller/DBBaseClass/DBSearchHistoryCell.m; sourceTree = SOURCE_ROOT; };
 		20120E9D228D32E100241228 /* UIViewController+DBCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DBCategory.h"; sourceTree = "<group>"; };
 		20120E9E228D32E100241228 /* UIViewController+DBCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DBCategory.m"; sourceTree = "<group>"; };
 		20120EA0228D336E00241228 /* AppDelegateHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegateHelper.h; sourceTree = "<group>"; };
 		20120EA1228D336E00241228 /* AppDelegateHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegateHelper.m; sourceTree = "<group>"; };
+		20120EA722951C8300241228 /* DBLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBLogManager.h; sourceTree = "<group>"; };
+		20120EA822951C8300241228 /* DBLogManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBLogManager.m; sourceTree = "<group>"; };
 		201BFAF9228BFCBD000DC2DA /* DBBaseTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBBaseTabBarViewController.h; sourceTree = "<group>"; };
 		201BFAFA228BFCBD000DC2DA /* DBBaseTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBBaseTabBarViewController.m; sourceTree = "<group>"; };
 		201BFB01228C07C0000DC2DA /* DBSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBSearchViewController.h; sourceTree = "<group>"; };
@@ -206,6 +221,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2010E9A722967D7800155C2C /* File */ = {
+			isa = PBXGroup;
+			children = (
+				2010E9AC22967F8600155C2C /* FileManager */,
+				2010E9A822967D7800155C2C /* PlistFile */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
+		2010E9A822967D7800155C2C /* PlistFile */ = {
+			isa = PBXGroup;
+			children = (
+				2010E9A922967DB400155C2C /* PlistFileManager.h */,
+				2010E9AA22967DB400155C2C /* PlistFileManager.m */,
+			);
+			path = PlistFile;
+			sourceTree = "<group>";
+		};
+		2010E9AC22967F8600155C2C /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				2010E9AD22967F9D00155C2C /* DBFileManager.h */,
+				2010E9AE22967F9D00155C2C /* DBFileManager.m */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
+		20120EA5229517FC00241228 /* DBLog */ = {
+			isa = PBXGroup;
+			children = (
+				20120EA622951C4B00241228 /* DBLogManager */,
+			);
+			path = DBLog;
+			sourceTree = "<group>";
+		};
+		20120EA622951C4B00241228 /* DBLogManager */ = {
+			isa = PBXGroup;
+			children = (
+				20120EA722951C8300241228 /* DBLogManager.h */,
+				20120EA822951C8300241228 /* DBLogManager.m */,
+			);
+			path = DBLogManager;
+			sourceTree = "<group>";
+		};
 		201BFAFD228C077C000DC2DA /* DBSearch */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +295,8 @@
 		201BFB00228C077C000DC2DA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2010E9B32296A47F00155C2C /* DBSearchHistoryCell.h */,
+				2010E9B42296A47F00155C2C /* DBSearchHistoryCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -474,8 +535,10 @@
 		20B9A25B228BBBC600A86A9F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				20120EA5229517FC00241228 /* DBLog */,
 				201BFB0E228C16B4000DC2DA /* DBLoading */,
 				201BFB06228C09DE000DC2DA /* DBDownLoader */,
+				2010E9A722967D7800155C2C /* File */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -507,6 +570,8 @@
 				20B9A270228BBF7400A86A9F /* DBBaseObject.m */,
 				20B9A272228BBFA300A86A9F /* DBBaseAdapter.h */,
 				20B9A273228BBFA300A86A9F /* DBBaseAdapter.m */,
+				2010E9B02296A43100155C2C /* DBBaseTableViewCell.h */,
+				2010E9B12296A43100155C2C /* DBBaseTableViewCell.m */,
 			);
 			path = DBBaseClass;
 			sourceTree = "<group>";
@@ -727,6 +792,7 @@
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
 				"${BUILT_PRODUCTS_DIR}/YTKNetwork/YTKNetwork.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -739,6 +805,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YTKNetwork.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -757,7 +824,9 @@
 				201BFB09228C0A06000DC2DA /* DBDownLoadManager.m in Sources */,
 				20B9A268228BBEDF00A86A9F /* DBBaseWebViewController.m in Sources */,
 				20B9A228228BB39900A86A9F /* DBBrowser.xcdatamodeld in Sources */,
+				20120EA922951C8300241228 /* DBLogManager.m in Sources */,
 				20B9A222228BB39900A86A9F /* ViewController.m in Sources */,
+				2010E9B52296A47F00155C2C /* DBSearchHistoryCell.m in Sources */,
 				20B9A277228BC03600A86A9F /* DBWebViewController.m in Sources */,
 				201BFB15228CF6DB000DC2DA /* DBRootViewControllerManager.m in Sources */,
 				201BFB04228C07C0000DC2DA /* DBSearchViewController.m in Sources */,
@@ -765,13 +834,16 @@
 				20B9A271228BBF7400A86A9F /* DBBaseObject.m in Sources */,
 				20B9A26B228BBEFC00A86A9F /* DBBaseView.m in Sources */,
 				20120EA2228D336E00241228 /* AppDelegateHelper.m in Sources */,
+				2010E9AF22967F9D00155C2C /* DBFileManager.m in Sources */,
 				20B9A230228BB39B00A86A9F /* main.m in Sources */,
 				201BFB1E228CF8CE000DC2DA /* DBDefaultManager.m in Sources */,
 				20B9A265228BBE5500A86A9F /* DBNavigationController.m in Sources */,
 				201BFB51228D0125000DC2DA /* GuidePagesViewController.m in Sources */,
 				20B9A274228BBFA300A86A9F /* DBBaseAdapter.m in Sources */,
 				20B9A21F228BB39900A86A9F /* AppDelegate.m in Sources */,
+				2010E9AB22967DB400155C2C /* PlistFileManager.m in Sources */,
 				201BFB11228C16D7000DC2DA /* DBLoadingView.m in Sources */,
+				2010E9B22296A43100155C2C /* DBBaseTableViewCell.m in Sources */,
 				201BFAFB228BFCBD000DC2DA /* DBBaseTabBarViewController.m in Sources */,
 				20B9A262228BBE2500A86A9F /* DBBaseViewController.m in Sources */,
 				20B9A26E228BBF5300A86A9F /* DBBaseProcessPool.m in Sources */,

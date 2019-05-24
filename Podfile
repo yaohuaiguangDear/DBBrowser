@@ -21,7 +21,8 @@ target 'DBBrowser' do
     pod 'IQKeyboardManager'
     pod 'SDWebImage'
     pod 'Masonry'
- 
+    #文件压缩,解压
+    pod 'SSZipArchive'
 
 end
 

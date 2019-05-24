@@ -29,23 +29,23 @@
     
     */
    
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
-    
-    //    NSString *voiceURL = [self _urlByAppendingStringWithHostName:url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        //文件的存储路径
-        NSURL *downloadURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        NSString * fileName = [url lastPathComponent];
-        NSString * filePath = [NSString stringWithFormat:@"Audios/luyin_%@", fileName];
-        downloadURL = [downloadURL URLByAppendingPathComponent:filePath];
-        return downloadURL;
-    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        
-    }];
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
+//
+//    //    NSString *voiceURL = [self _urlByAppendingStringWithHostName:url];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+//    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+//
+//    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+//        //文件的存储路径
+//        NSURL *downloadURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+//        NSString * fileName = [url lastPathComponent];
+//        NSString * filePath = [NSString stringWithFormat:@"Audios/luyin_%@", fileName];
+//        downloadURL = [downloadURL URLByAppendingPathComponent:filePath];
+//        return downloadURL;
+//    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+//
+//    }];
     /*
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath,NSURLResponse *response) {
         //文件的存储路径
@@ -64,6 +64,25 @@
         }
     }];
      */
+//    [downloadTask resume];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    //    NSString *voiceURL = [self _urlByAppendingStringWithHostName:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        NSLog(@"下载进度：%.0f％", downloadProgress.fractionCompleted * 100);
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        //填写保存路径及文件名
+        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:response.suggestedFilename];
+        //        NSLog(@"%@", filePath);
+        DBLog(@"%@", filePath);
+        //文件的存储路径
+        return [NSURL fileURLWithPath:filePath];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        //保存文件
+        [self saveVideo:filePath];
+    }];
     [downloadTask resume];
     
     
@@ -76,27 +95,86 @@
     NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request];
     [task resume];
      */
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.yao.dbbrowser"];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
     //    NSString *voiceURL = [self _urlByAppendingStringWithHostName:url];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        
+        NSLog(@"下载进度：%.0f％", downloadProgress.fractionCompleted * 100);
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:downloadTask.response.suggestedFilename];
-        [[NSFileManager defaultManager] moveItemAtURL:targetPath toURL:[NSURL fileURLWithPath:filePath] error:nil];
-        NSLog(@"%@", filePath);
-        
-//        [self saveVideo:[NSURL fileURLWithPath:filePath]];
+        //填写保存路径及文件名
+        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:response.suggestedFilename];
+//        NSLog(@"%@", filePath);
+        DBLog(@"%@", filePath);
         //文件的存储路径
       
         return [NSURL fileURLWithPath:filePath];
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        
+        //保存文件
+        if (!error) {
+            //保存文件
+            [self saveVideo:filePath];
+        }
     }];
     [downloadTask resume];
     
+}
+- (void)downloadTaskWithURL:(NSString *)url
+                   progress:(nullable void (^)(NSProgress *downloadProgress))downloadProgressBlock{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:downloadProgressBlock destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        //填写保存路径及文件名
+        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:response.suggestedFilename];
+        //        NSLog(@"%@", filePath);
+        DBLog(@"%@", filePath);
+        //文件的存储路径
+        
+        return [NSURL fileURLWithPath:filePath];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        if (!error) {
+            //保存文件
+            [self saveVideo:filePath];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"下载文件失败" message:[NSString stringWithFormat:@"%@", error] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            [alert show];
+        }
+    }];
+    [downloadTask resume];
+    
+}
+- (void)downloadTaskWithRequest:(NSURLRequest *)request
+                       progress:(nullable void (^)(NSProgress *downloadProgress))downloadProgressBlock{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:downloadProgressBlock destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        //填写保存路径及文件名
+        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:response.suggestedFilename];
+        //        NSLog(@"%@", filePath);
+        DBLog(@"%@", filePath);
+        //文件的存储路径
+        
+        return [NSURL fileURLWithPath:filePath];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        if (!error) {
+            //保存文件
+            [self saveVideo:filePath];
+        }
+    }];
+    [downloadTask resume];
+}
+- (void)downloadTaskWithRequest:(NSURLRequest *)request
+                                             progress:(nullable void (^)(NSProgress *downloadProgress))downloadProgressBlock
+                                          destination:(nullable NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
+                                    completionHandler:(nullable void (^)(NSURLResponse *response, NSURL * _Nullable filePath, NSError * _Nullable error))completionHandler{
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:downloadProgressBlock destination:destination completionHandler:completionHandler];
+    [downloadTask resume];
 }
 #pragma mark -- NSURLSessionDownloadDelegate
 
